@@ -1,0 +1,56 @@
+.flex-container {
+    border:1px solid rgb(197, 193, 193);
+    margin: 50px 30px 0px 30px;
+    box-shadow: 5px 5px 3px rgb(221, 221, 221);
+    /* margin:10px; */
+}
+.child1 {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid rgb(197, 193, 193);
+    line-height: 25px;
+}
+.div1 {
+    display: flex;
+    padding-left: 10px;
+} 
+.span {
+    margin-right: 10px;
+}
+.span1 {
+    padding: 0px 3px 0px 3px;;
+}
+.bold {
+    font-weight: bold;
+}
+.div2 {
+    display: flex;
+    position: relative;
+}
+.icon {
+    position: absolute;
+    left: 615px;
+    top:5px;
+    justify-content: flex-end;
+}
+.child2{
+    display: flex;
+    justify-content: flex-start;
+}
+.flex-item {
+    width: 100px;
+    margin: 0px;
+    text-align: center;
+    line-height: 25px;
+}
+.item1 {
+    width:60%;
+    display: flex;
+    padding-left: 10px;
+}
+.item2 {
+    width:40%;
+    display: flex;
+    padding-left: 10px;
+    background-color: rgb(179, 176, 176);
+}
