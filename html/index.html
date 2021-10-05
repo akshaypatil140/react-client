@@ -7,26 +7,31 @@
 </head>
 
 <body>
-    <div class="flex-container">
-        <div class="child1">
-            <div class="div1">
-                <span class="span bold" style="margin-right: 80px;">Checkout</span>
-                <span class="span">Shipping </span>
-                <span class="span span1">/ </span>
-                <span class="span bold"> Payment Method</span>
-                <span class="span span1">/ </span>
-                <span class="span">Confirmation </span>
-            </div>
-            <div class="div2">
-                <span><i class="fa fa-window-close icon"></i></span>
+    <div class="checkout">
+        <div class="checkout__top">
+           <h1 class="checkout__heading">
+               Checkout
+           </h1>
+           <div class="checkout__badges">
+               <p>Shipping  </p>
+               <p class="checkout__badges--active">Payment Method  </p>
+               <p>Confirmation </p>
+           </div>
+           <div class="checkout__close">
+               <i class="fa fa-window-close"></i>
             </div>
         </div>
-        <div class="child2">
-            <div class="flex-item item1">Payment Block</div>
-            <div class="flex-item item2">Cart Block</div>
+        <hr class="hr"/>
+        <div class="checkout__down">
+           <p class="checkout__paymentBlock">
+               Payment Block
+           </p>
+           <p class="checkout__cartBlock">
+               Cart Block
+           </p>
         </div>
-
-    </div>
+   </div>
 </body>
+
 </html>
 
