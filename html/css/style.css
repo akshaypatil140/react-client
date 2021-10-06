@@ -23,9 +23,10 @@ body {
     padding: 10px 10px 15px 10px;
 }
 
-.checkout__heading {
-    font-size: 17px;
-    font-family: serif;
+.checkout__heading{
+        font-size: 18px;
+        font-family: serif;
+        color: gray;
 }
 
 .checkout__badges {
