@@ -1,54 +1,108 @@
-*{
-    margin:0;
-    padding:0;
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url(../images/background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .checkout {
+    background: white;
     margin: 100px auto;
     width: 90%;
-    box-shadow: 6px 6px 7px #888888ab;
-    border: 1px solid #eaeaea;
+    box-shadow: 6px 6px 7px #999898ab;
+    border: 1px solid #dddcdc;
 }
 
-.checkout__top{
+.checkout__top {
     display: flex;
     justify-content: space-between;
     padding: 10px 10px 15px 10px;
 }
 
-.checkout__heading{
-        font-size: 18px;
-        font-family: serif;
+.checkout__heading {
+    font-size: 17px;
+    font-family: serif;
 }
 
-.checkout__badges{
+.checkout__badges {
     display: flex;
     flex: 0.8;
     color: gray;
-    font-size: 18px;
+    font-size: 17px;
 }
 
-.checkout__badges>p+p:before{
-    content:"/";
-    padding:0 10px;
-}
-.checkout__badges--active{
-    font-weight:600;
-}
-.checkout__close{
-    font-size:21px;
+.checkout__badges>p+p:before {
+    content: "/";
+    padding: 0px 10px 0px 10px;
 }
 
-.hr.hr{
-    width:100%;
-    border-top:1px solid #eaeaea;
+.checkout__badges--active {
+    font-weight: 600;
 }
-.checkout__down{
+
+.checkout__close {
+    font-size: 20px;
+}
+
+.hr {
+    width: 100%;
+    border-top: 1px solid #eaeaea;
+}
+
+.main {
+    display: flex;
+}
+
+.main__left {
+    flex: 0.65;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.main__right {
+    flex: 0.35;
+}
+
+.wallet {
+    padding: 10px 0px 10px 0px;
+}
+
+
+/* .payment__down{
     display:flex;
     color:gray;
-    font-size:18px;
+    font-size:17px;
+} */
+
+.left__walletCards {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0px;
+    /* padding:10px; */
 }
-.checkout__paymentBlock{
+
+.walletCards__image {
+    width: 200px;
+    padding: 10px;
+    /*margin: 5px; */
+    border-radius: 4px;
+}
+
+.walletCards__images {
+    width: 200px;
+    /* margin: 10px; */
+}
+
+.img--active {
+    border: 1px solid #ddd;
+}
+
+
+/* .checkout__paymentBlock{
     padding: 10px 10px 15px 10px;
     flex:0.6;
 }
@@ -56,4 +110,146 @@
     flex:0.4;
     padding: 10px 10px 15px 10px;
     background:#eeefef;
+} */
+
+.productDetails__cards {
+    flex: 0.35;
 }
+
+
+/* p {
+    padding-left:15px;
+} */
+
+.left__bottomForm {
+    width: 350px;
+    margin: auto;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="button"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    background-color: green;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: white;
+}
+
+.form__input {
+    padding: 10px;
+    margin: 10px 0px;
+    width: 100%;
+}
+
+.formInput__50 {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* .form__50 {
+    width: 50%;
+} */
+
+.form__margin {
+    margin-right: 10px !important;
+}
+
+.button--success {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.main__right {
+    background-color: rgb(243, 242, 242);
+}
+
+.product {
+    display: flex;
+    padding: 10px 10px;
+}
+
+.product__image {
+    flex-grow: 0;
+    margin-right: 5px;
+}
+
+.product__image img {
+    border: 3px solid rgb(199, 198, 198);
+}
+
+.product__price {
+    align-items: flex-end;
+    flex-grow: 0;
+    padding-top: 5px;
+}
+
+.product__info {
+    padding-top: 5px;
+    flex-grow: 3;
+    padding-left: 10px;
+}
+
+.product__heading {
+    font-size: 17px;
+    font-family: serif;
+}
+
+.padding {
+    padding-bottom: 70px;
+}
+
+.price {
+    padding: 0px 10px;
+}
+
+.price div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+
+/* .price__heading {
+    font-size: 17px;
+    font-weight: lighter;
+    font-family: serif;
+    flex-grow: 0;
+}
+
+.price__details {
+    display: flex;
+    padding: 10px 10px;
+}
+
+.price__info {
+    display: flex;
+}
+
+.price__total {
+    font-weight: bold;
+} */
+
+
+/* .product__paragraph {
+    font-size: 16px;
+    font-family: serif;
+} */
