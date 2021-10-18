@@ -33,7 +33,7 @@ export const inputContainer = {
   'padding-right': '10px',
 };
 
-export const input = {
+export const inputSize = {
   width: '100%',
   'margin-left': '5px',
   'margin-right': '5px',
