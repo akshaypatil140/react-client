@@ -8,6 +8,7 @@ const RadioGroup = (props) => {
     error,
     onChange,
     options,
+    onBlur,
   } = props;
 
   return (
@@ -26,7 +27,7 @@ const RadioGroup = (props) => {
           if (selectValue !== value) return false;
           return (
             <div>
-              <input onChange={onChange} id={selectValue} label={label} name={value} type="radio" key={selectValue} value={selectValue} />
+              <input onChange={onChange} id={selectValue} label={label} onBlur={onBlur} name={value} type="radio" key={selectValue} value={selectValue} />
               <label htmlFor={selectValue}>{label}</label>
             </div>
           );
@@ -42,5 +43,6 @@ RadioGroup.propTypes = {
   error: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.string.isRequired,
+  onBlur: PropTypes.func.isRequired,
 };
 export default RadioGroup;

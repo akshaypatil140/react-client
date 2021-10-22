@@ -4,7 +4,7 @@ import { error, errorBorder, inputSize } from './style';
 
 const TextField = (props) => {
   const {
-    label, value, disabled, errorMessage, onChange,
+    label, value, disabled, errorMessage, onChange, onBlur,
   } = props;
   // eslint-disable-next-line no-console
   console.log(props);
@@ -12,7 +12,7 @@ const TextField = (props) => {
     <>
       <label htmlFor>
         <b>{label}</b>
-        <input name="name" onChange={onChange} style={errorMessage ? errorBorder : inputSize} type="text" value={value} disabled={disabled} />
+        <input onBlur={onBlur} name="name" onChange={onChange} style={errorMessage ? errorBorder : inputSize} type="text" value={value} disabled={disabled} />
       </label>
       <div style={error}>{errorMessage}</div>
     </>
@@ -25,6 +25,7 @@ TextField.propTypes = {
   disabled: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
+  onBlur: PropTypes.func.isRequired,
 };
 
 export default TextField;

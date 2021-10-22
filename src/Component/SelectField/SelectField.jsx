@@ -4,7 +4,7 @@ import { selectInput } from './style';
 
 const SelectField = (props) => {
   const {
-    value, error, onChange, options, defaultText,
+    value, error, onChange, options, defaultText, onBlur,
   } = props;
 
   return (
@@ -16,7 +16,7 @@ const SelectField = (props) => {
       </div>
       <br />
       <div>
-        <select id="customSelect" style={selectInput} value={value} onChange={onChange}>
+        <select onBlur={onBlur} style={selectInput} value={value} onChange={onChange}>
           <option key={defaultText} value={defaultText}>{defaultText}</option>
           {
             options.map((item) => {
@@ -36,6 +36,7 @@ SelectField.propTypes = {
   onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf.isRequired,
   defaultText: PropTypes.string.isRequired,
+  onBlur: PropTypes.func.isRequired,
 };
 
 export default SelectField;
