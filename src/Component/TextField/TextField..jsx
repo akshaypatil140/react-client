@@ -6,6 +6,7 @@ const TextField = (props) => {
   const {
     label, value, disabled, errorMessage, onChange,
   } = props;
+  console.log(props);
   return (
     <>
       <label htmlFor>

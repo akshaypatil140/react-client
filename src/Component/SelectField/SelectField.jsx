@@ -16,7 +16,7 @@ const SelectField = (props) => {
       </div>
       <br />
       <div>
-        <select style={selectInput} value={value} onChange={onChange}>
+        <select id="customSelect" style={selectInput} value={value} onChange={onChange}>
           <option key={defaultText} value={defaultText}>{defaultText}</option>
           {
             options.map((item) => {

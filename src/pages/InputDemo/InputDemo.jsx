@@ -83,7 +83,7 @@ const TextFieldDemo = () => {
 
   return (
     <div style={inputDemoContainer}>
-      <TextField label="Name" onChange={handleNameChange} />
+      <TextField label="Name" onChange={handleNameChange} value={value.name} />
       <SelectField defaultText="Select" value={value.sport} options={selectOptions} onChange={handleSportChange} />
       <RadioGroup value={value.sport} options={radioOptions} onChange={handleSportProfileChange} />
     </div>
