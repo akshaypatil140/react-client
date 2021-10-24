@@ -1,24 +1,25 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import {
   SelectField, RadioGroup, TextField, Button,
 } from '../../Component';
 import { btnContainer, inputDemoContainer, btnStyle } from './style';
-import { SELECT_OPTIONS, RADIO_OPTIONS, CRICKET_VALUE } from '../../configs/constant';
-import { getError, hasError, isTouched } from '../../lib/utils/helper';
+import {
+  SELECT_OPTIONS, RADIO_OPTIONS, DEFAULT_SELECT, CRICKET_VALUE,
+} from '../../configs/constant';
+import { getError, hasErrors, isTouched } from '../../lib/utils/helper';
 
 const schema = Yup.object({
   name: Yup.string().min(3).max(10).label('Name')
     .required(),
   sport: Yup.string().required().label('Sport'),
   football: Yup.string().label('What you do?').when('sport', {
-    is: (val) => val === 'football',
+    is: (value) => value === 'football',
     then: Yup.string().required(),
     otherwise: Yup.string().min(0),
   }),
   cricket: Yup.string().label('What you do?').when('sport', {
-    is: (val) => val === 'cricket',
+    is: (value) => value === 'cricket',
     then: Yup.string().required(),
     otherwise: Yup.string().min(0),
   }),
@@ -30,21 +31,16 @@ const InputDemo = () => {
   const [cricket, setCricket] = useState('');
   const [football, setFootball] = useState('');
   const [error, setError] = useState([]);
-  const [bgColor, setBgColor] = useState('gray');
   const [touched, setTouched] = useState([]);
 
-  const handleErrors = (formValues) => {
+  const handleErrors = async (formValues) => {
     const {
-      name: newName, sport: newSport, cricket: newCricket, football: newFootball,
+      name: newName, sport: newSport, football: newFootball, cricket: newCricket,
     } = formValues;
-
-    schema.validate({
+    await schema.validate({
       name: newName, sport: newSport, football: newFootball, cricket: newCricket,
     }, { abortEarly: false }).then(() => {
-      setName(name);
-      setSport(sport);
-      setCricket(cricket);
-      setFootball(football);
+      setError({});
     }).catch((errors) => {
       const schemaErrors = {};
       if (errors) {
@@ -54,31 +50,36 @@ const InputDemo = () => {
     });
   };
 
-  const onBlurHandler = (event, type) => {
+  const onBlurHandler = async (event, type) => {
     touched[type] = true;
     setTouched(touched);
-    handleErrors({
+    await handleErrors({
       name, sport, football, cricket,
     });
   };
 
   const handleSportChange = async (event) => {
-    setSport(event.target.value);
+    const { value } = event.target;
+    if (value === '' || value === DEFAULT_SELECT) {
+      setSport('');
+    } else {
+      setSport(value);
+    }
     setCricket('');
     setFootball('');
-    handleErrors({
+    await handleErrors({
       name, sport, football, cricket,
     });
   };
 
   const handleNameChange = async (event) => {
     setName(event.target.value);
-    // handleErrors({
-    //   name, sport, football, cricket,
-    // });
+    await handleErrors({
+      name, sport, football, cricket,
+    });
   };
 
-  const handleSportProfileChange = async (event) => {
+  const handleWhatToDoChange = async (event) => {
     if (event.target.value === CRICKET_VALUE) {
       setFootball('');
       setCricket(event.target.attributes.label.value);
@@ -86,17 +87,16 @@ const InputDemo = () => {
       setCricket('');
       setFootball(event.target.attributes.label.value);
     }
-    // handleErrors({
-    //   name, sport, football, cricket,
-    // });
+    await handleErrors({
+      name, sport, football, cricket,
+    });
   };
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.log({
-      name, sport, cricket, football,
+      name, sport, football, cricket,
     });
-    // console.log(error);
-    setBgColor('#52a53d');
   });
 
   const onClick = () => {
@@ -106,29 +106,47 @@ const InputDemo = () => {
     <form style={inputDemoContainer}>
       <TextField
         onBlur={(event) => { onBlurHandler(event, 'name'); }}
-        errorMessage={touched.name ? getError(error, 'name') : ''}
+        errorMessage={getError(touched, error, 'name')}
         label="Name"
         onChange={handleNameChange}
       />
       <SelectField
         onBlur={(event) => { onBlurHandler(event, 'sport'); }}
-        error={touched.sport ? getError(error, 'sport') : ''}
+        error={getError(touched, error, 'sport')}
         selectLabel="Select the game you want to play?"
         defaultText="Select"
         value={sport}
         options={SELECT_OPTIONS}
         onChange={handleSportChange}
       />
-      <RadioGroup
-        onBlur={(event) => { onBlurHandler(event, 'cricket'); }}
-        error={touched.cricket ? getError(error, 'cricket') : ''}
-        value={sport}
-        options={RADIO_OPTIONS}
-        onChange={handleSportProfileChange}
-      />
+      {sport === 'cricket'
+        ? (
+          <RadioGroup
+            onBlur={(event) => { onBlurHandler(event, 'cricket'); }}
+            error={getError(touched, error, 'cricket')}
+            value={sport}
+            options={RADIO_OPTIONS}
+            onChange={handleWhatToDoChange}
+          />
+        )
+        : (
+          <RadioGroup
+            onBlur={(event) => { onBlurHandler(event, 'football'); }}
+            error={getError(touched, error, 'football')}
+            value={sport}
+            options={RADIO_OPTIONS}
+            onChange={handleWhatToDoChange}
+          />
+        )}
       <div style={btnContainer}>
         <Button color="gray" style={btnStyle} value="Cancel" />
-        <Button color={bgColor} style={btnStyle} value="Submit" disabled={hasError(error) || !isTouched(touched)} onClick={onClick} />
+        <Button
+          color={hasErrors(error) || !isTouched(touched) ? 'gray' : '#28a745'}
+          style={btnStyle}
+          value="Submit"
+          disabled={hasErrors(error) || !isTouched(touched)}
+          onClick={onClick}
+        />
       </div>
     </form>
   );
