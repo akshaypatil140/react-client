@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { errorMessage } from '../SelectField/style';
 // import { hide, show } from './style';
 
 const RadioGroup = (props) => {
@@ -33,7 +34,7 @@ const RadioGroup = (props) => {
           );
         })}
       </div>
-      <p>{error}</p>
+      <p style={errorMessage}>{error}</p>
     </>
   );
 };
