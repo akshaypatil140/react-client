@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { selectInput } from './style';
+import { selectInput, errorMessage } from './style';
 
 const SelectField = (props) => {
   const {
@@ -26,7 +26,7 @@ const SelectField = (props) => {
           }
         </select>
       </div>
-      <p>{error}</p>
+      <p style={errorMessage}>{error}</p>
     </div>
   );
 };
