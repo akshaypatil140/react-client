@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 /* eslint-disable react/jsx-closing-tag-location */
 import React, { useEffect, useState } from 'react';
 import {
@@ -65,6 +66,7 @@ const Login = () => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.log({ email, password });
   });
 
