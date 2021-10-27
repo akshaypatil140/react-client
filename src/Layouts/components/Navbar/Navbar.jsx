@@ -5,7 +5,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
+import { Link } from 'react-router-dom';
 // import { AddDialog } from '../../../components/Trainee/components';
 
 const Navbar = () => (
@@ -18,17 +19,18 @@ const Navbar = () => (
           color="inherit"
           aria-label="menu"
           sx={{ mr: 2 }}
+          width="auto"
         >
-          <MenuIcon />
+          {/* <MenuIcon /> */}
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Trainee Portal
         </Typography>
-        <Button color="inherit">TRAINEE</Button>
-        <Button color="inherit">TEXTFIELD DEMO</Button>
-        <Button color="inherit">INPUTDEMO</Button>
-        <Button color="inherit">CHILDERN DEMO</Button>
-        <Button color="inherit">LOGOUT</Button>
+        <Button><Link style={{ color: 'white', textDecoration: 'none' }} to="/Trainee">TRAINEE</Link></Button>
+        <Button><Link style={{ color: 'white', textDecoration: 'none' }} to="/TextFieldDemo">TEXTFIELD DEMO</Link></Button>
+        <Button><Link style={{ color: 'white', textDecoration: 'none' }} to="/InputDemo">INPUT DEMO</Link></Button>
+        <Button><Link style={{ color: 'white', textDecoration: 'none' }} to="/ChildrenDemo">CHILDREN DEMO</Link></Button>
+        <Button style={{ marginLeft: '30px' }}><Link style={{ color: 'white', textDecoration: 'none' }} to="/Login">LOGOUT</Link></Button>
       </Toolbar>
     </AppBar>
   </Box>
