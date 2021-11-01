@@ -1,30 +1,30 @@
 import React from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
-import CssBaseline from '@mui/material/CssBaseline';
-import { Typography } from '@material-ui/core';
-import { AuthRoute, PrivateRoute } from './routes';
+// import CssBaseline from '@mui/material/CssBaseline';
 import {
-  TextFieldDemo, InputDemo, ChildrenDemo, Trainee, Login, NoMatch,
+  Trainee, InputDemo, TextFieldDemo, Login, ChildrenDemo, NoMatch,
 } from './pages';
+import AuthRoute from './routes/AuthRoute';
+import { PrivateRoute } from './routes';
 import TraineeDetail from './pages/Trainee/TraineeDetails';
 
-const App = () => (
-  <BrowserRouter>
-    <CssBaseline />
-    <Typography>
-      <Switch>
-        <PrivateRoute exact path="/" component={Trainee} />
-        <PrivateRoute exact path="/Trainee" component={Trainee} />
-        <PrivateRoute exact path="/TextFieldDemo" component={TextFieldDemo} />
-        <PrivateRoute exact path="/InputDemo" component={InputDemo} />
-        <PrivateRoute exact path="/ChildrenDemo" component={ChildrenDemo} />
-        <AuthRoute exact path="/Login" component={Login} />
-        <PrivateRoute path="/trainee/:id" component={TraineeDetail} />
-        <PrivateRoute component={NoMatch} />
-      </Switch>
-    </Typography>
-
-  </BrowserRouter>
-);
+function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Switch>
+          <PrivateRoute exact path="/" component={Trainee} />
+          <AuthRoute exact path="/login" component={Login} />
+          <PrivateRoute exact path="/trainee" component={Trainee} />
+          <PrivateRoute exact path="/childrendemo" component={ChildrenDemo} />
+          <PrivateRoute exact path="/textfielddemo" component={TextFieldDemo} />
+          <PrivateRoute exact path="/inputdemo" component={InputDemo} />
+          <PrivateRoute exact path="/trainee/:id" component={TraineeDetail} />
+          <PrivateRoute component={NoMatch} />
+        </Switch>
+      </BrowserRouter>
+    </div>
+  );
+}
 
 export default App;
