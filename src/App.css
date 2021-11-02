@@ -9,7 +9,7 @@ input:hover {
     /* border: 2px solid orangered !important; */
     background-color: orangered !important; 
 }
-#customOption::after {
+#customOption:hover {
     /* border: 2px solid orangered !important; */
     background-color: orangered !important; 
 }

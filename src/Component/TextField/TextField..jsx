@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { PropTypes } from 'prop-types';
-import { errors, errorBorder, inputSize } from './style';
+import { error, errorBorder, inputSize } from './style';
 
 const TextField = (props) => {
   const {
-    label, value, disabled, errorMessage, onChange, error,
+    label, value, disabled, errorMessage, onChange, onBlur,
   } = props;
   // eslint-disable-next-line no-console
   console.log(props);
@@ -12,14 +12,11 @@ const TextField = (props) => {
     <>
       <label htmlFor>
         <b>{label}</b>
-        <input name="name" onChange={onChange} style={errorMessage ? errorBorder : inputSize} type="text" value={value} disabled={disabled} error={error} />
+        <input onBlur={onBlur} name="name" onChange={onChange} style={errorMessage ? errorBorder : inputSize} type="text" value={value} disabled={disabled} />
       </label>
-      <div style={errors}>{error}</div>
+      <div style={error}>{errorMessage}</div>
     </>
   );
-};
-TextField.defaultProps = {
-  error: '',
 };
 
 TextField.propTypes = {
@@ -28,7 +25,7 @@ TextField.propTypes = {
   disabled: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
-  error: PropTypes.string,
+  onBlur: PropTypes.func.isRequired,
 };
 
 export default TextField;

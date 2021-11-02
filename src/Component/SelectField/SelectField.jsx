@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { selectInput } from './style';
-import '../../App.css';
+import { selectInput, errorMessage } from './style';
 
 const SelectField = (props) => {
   const {
-    value, error, onChange, options, defaultText,
+    value, error, onChange, options, defaultText, onBlur,
   } = props;
 
   return (
@@ -17,30 +16,27 @@ const SelectField = (props) => {
       </div>
       <br />
       <div>
-        <select id="customSelect" style={selectInput} value={value} onChange={onChange}>
-          <option id="customOption" key={defaultText} value={defaultText}>{defaultText}</option>
+        <select onBlur={onBlur} style={selectInput} value={value} onChange={onChange}>
+          <option key={defaultText} value={defaultText}>{defaultText}</option>
           {
             options.map((item) => {
               const { value: selectValue, label } = item;
-              return <option id="customOption" key={label} value={selectValue}>{label}</option>;
+              return <option key={label} value={selectValue}>{label}</option>;
             })
           }
         </select>
       </div>
-      <p>{error}</p>
+      <p style={errorMessage}>{error}</p>
     </div>
   );
 };
-SelectField.defaultProps = {
-  error: '',
-};
-
 SelectField.propTypes = {
   value: PropTypes.string.isRequired,
-  error: PropTypes.string,
+  error: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf.isRequired,
   defaultText: PropTypes.string.isRequired,
+  onBlur: PropTypes.func.isRequired,
 };
 
 export default SelectField;
