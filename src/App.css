@@ -1,0 +1,15 @@
+#customSelect:hover {
+    border: 2px solid orangered !important;
+    /* background-color: orangered !important;  */
+}
+input:hover {
+    border: 2px solid orangered !important;
+}
+#customOption:hover {
+    /* border: 2px solid orangered !important; */
+    background-color: orangered !important; 
+}
+#customOption:hover {
+    /* border: 2px solid orangered !important; */
+    background-color: orangered !important; 
+}
