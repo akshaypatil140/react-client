@@ -7,9 +7,9 @@ export const inputContainer = {
   display: 'flex',
   'flex-direction': 'column',
   border: '1px solid',
-  'margin-left': '5px',
+  marginLeft: '5px',
 };
 
 export const headingStyle = {
-  'margin-left': '5px',
+  marginLeft: '5px',
 };
