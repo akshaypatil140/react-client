@@ -1,47 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { SelectField, RadioGroup, TextField } from '../../Component';
 import { inputDemoContainer } from './style';
+import { selectOptions, radioOptions } from '../../configs/constant';
 
 const TextFieldDemo = () => {
-  const selectOptions = [
-    {
-      value: 'cricket',
-      label: 'Cricket',
-    },
-    {
-      value: 'football',
-      label: 'Football',
-    },
-
-  ];
-
-  const radioOptions = [
-    {
-      value: 'cricket',
-      label: 'Wicket-Keeper',
-    },
-    {
-      value: 'cricket',
-      label: 'Batsmen',
-    },
-    {
-      value: 'cricket',
-      label: 'Bowler',
-    },
-    {
-      value: 'cricket',
-      label: 'All Rounder',
-    },
-    {
-      value: 'football',
-      label: 'Defender',
-    },
-    {
-      value: 'football',
-      label: 'striker',
-    },
-  ];
-
   const [value, setValue] = useState({
     name: '',
     sport: '',
@@ -83,7 +45,7 @@ const TextFieldDemo = () => {
 
   return (
     <div style={inputDemoContainer}>
-      <TextField label="Name" onChange={handleNameChange} value={value.name} />
+      <TextField label="Name" onChange={handleNameChange} value={value.name} error="" />
       <SelectField defaultText="Select" value={value.sport} options={selectOptions} onChange={handleSportChange} />
       <RadioGroup value={value.sport} options={radioOptions} onChange={handleSportProfileChange} />
     </div>

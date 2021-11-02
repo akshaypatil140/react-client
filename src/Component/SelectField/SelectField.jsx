@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { selectInput } from './style';
+import '../../App.css';
 
 const SelectField = (props) => {
   const {
@@ -17,11 +18,11 @@ const SelectField = (props) => {
       <br />
       <div>
         <select id="customSelect" style={selectInput} value={value} onChange={onChange}>
-          <option key={defaultText} value={defaultText}>{defaultText}</option>
+          <option id="customOption" key={defaultText} value={defaultText}>{defaultText}</option>
           {
             options.map((item) => {
               const { value: selectValue, label } = item;
-              return <option key={label} value={selectValue}>{label}</option>;
+              return <option id="customOption" key={label} value={selectValue}>{label}</option>;
             })
           }
         </select>
@@ -30,9 +31,13 @@ const SelectField = (props) => {
     </div>
   );
 };
+SelectField.defaultProps = {
+  error: '',
+};
+
 SelectField.propTypes = {
   value: PropTypes.string.isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf.isRequired,
   defaultText: PropTypes.string.isRequired,
