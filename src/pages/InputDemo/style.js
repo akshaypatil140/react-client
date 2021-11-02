@@ -13,3 +13,8 @@ export const inputContainer = {
 export const headingStyle = {
   marginLeft: '5px',
 };
+
+export const inputDemoContainer = {
+  'font-size': '16px !important',
+  margin: '1vw',
+};
