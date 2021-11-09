@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Text = (props) => {
+const Math = (props) => {
   const {
     first, second, operator, children,
   } = props;
@@ -38,14 +38,14 @@ const Text = (props) => {
     </>
   );
 };
-Text.propTypes = {
+Math.propTypes = {
   first: PropTypes.number.isRequired,
   second: PropTypes.number.isRequired,
   operator: PropTypes.string.isRequired,
   result: PropTypes.number.isRequired,
   children: PropTypes.func,
 };
-Text.defaultProps = {
+Math.defaultProps = {
   children: undefined,
 };
-export default Text;
+export default Math;
