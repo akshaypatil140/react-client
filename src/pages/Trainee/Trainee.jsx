@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { DataTable } from '../../Component';
+import { getDateFormatted } from '../../lib/utils/helper';
 import { AddDialog } from './component';
 import trainees from './data/trainee';
 import TraineeList from './TraineeList';
@@ -7,7 +8,7 @@ import TraineeList from './TraineeList';
 const Trainee = () => {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('name');
-  const [alltrainees, setAllTrainees] = useState(trainees);
+  const [alltrainees, setAllTrainees] = useState(trainees.map(({ id, ...item }) => item));
 
   const handleSort = (field) => {
     if (order === 'asc') {
@@ -56,6 +57,7 @@ const Trainee = () => {
     default:
       break;
     }
+    // eslint-disable-next-line no-console
     console.log('compareFn', compareFn);
     sortedItems = itemsToSort.sort(compareFn);
     setAllTrainees(sortedItems);
@@ -67,21 +69,24 @@ const Trainee = () => {
       <DataTable
         trainees={alltrainees}
         id="data_table_id"
-        column={[
+        columns={[
           {
             field: 'name',
             label: 'Name',
             align: 'left',
+            format: (value) => value.toUpperCase(),
           },
           {
             field: 'email',
             label: 'Email',
             align: 'left',
+            format: (value) => value.toUpperCase(),
           },
           {
             field: 'createdAt',
             label: 'Date',
             align: 'right',
+            format: getDateFormatted,
           },
         ]}
         onSort={handleSort}

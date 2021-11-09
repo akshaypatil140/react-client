@@ -113,6 +113,15 @@ const AddDialog = () => {
     });
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setName('');
+    setEmail('');
+    setPassword('');
+    setPasswordConfirmation('');
+    setOpen(false);
+  };
+
   useEffect(() => {
     // eslint-disable-next-line no-console
     console.log({
@@ -131,7 +140,7 @@ const AddDialog = () => {
       </Button>
       <Dialog fullWidth maxWidth="md" open={open} onClose={handleClose}>
         <DialogTitle>Add Trainee</DialogTitle>
-        <form>
+        <form onSubmit={handleSubmit}>
           <DialogContent>
             <DialogContentText>
               Enter your trainee details
