@@ -1,15 +1,26 @@
-import * as React from 'react';
-// eslint-disable-next-line import/named
-// import { TextFieldDemo } from './pages/TextFieldDemo';
-// eslint-disable-next-line import/named
-import { InputDemo } from './pages';
+import React from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import { Typography } from '@mui/material';
+import theme from './theme';
+import { ChildrenDemo } from './pages';
+
+// import logo from './logo.svg';
+// import './App.css';
+// import TextFieldDemo from './pages/TextFieldDemo/TextFieldDemo';
+// import InputDemo from './pages/InputDemo/InputDemo';
 
 function App() {
   return (
-    <div>
+    <ThemeProvider theme={theme}>
+      {/* <div className="App"> */}
       {/* <TextFieldDemo /> */}
-      <InputDemo />
-    </div>
+      {/* <InputDemo />
+      </div> */}
+
+      <Typography>
+        <ChildrenDemo />
+      </Typography>
+    </ThemeProvider>
   );
 }
 
