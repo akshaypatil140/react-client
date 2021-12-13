@@ -1,5 +1,5 @@
-/* eslint-disable react/jsx-closing-tag-location */
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -10,230 +10,149 @@ import DialogTitle from '@mui/material/DialogTitle';
 import InputAdornment from '@mui/material/InputAdornment';
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import * as Yup from 'yup';
-import { IconButton } from '@mui/material';
-import { getError, hasErrors, isTouched } from '../../../../lib/utils/helper';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-const schema = Yup.object({
-  name: Yup.string().min(3).max(10).label('Name')
-    .required(),
-  email: Yup.string().email().required().label('Email'),
-  password: Yup.string().matches(
-    /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-    'Password must contain at least 8 characters, one uppercase, one number and one special case character',
-  ).required('Password is required'),
-  passwordConfirmation: Yup.string().required('Password Confirmation is required').oneOf([Yup.ref('password'), null], 'Passwords must match'),
-});
+import { styles } from './style';
+import { hasErrors, isTouched } from '../../../../lib/utils/helper';
 
-const AddDialog = () => {
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState([]);
-  const [touched, setTouched] = useState([]);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const [show, setShow] = useState({
-    password: false,
-    passwordConfirmation: false,
-  });
-
-  const handleErrors = (formValues) => {
-    const {
-      name: newName,
-      email: newEmail,
-      password: newPassword,
-      passwordConfirmation: newPasswordConfirmation,
-    } = formValues;
-    schema.validate({
-      name: newName,
-      email: newEmail,
-      password: newPassword,
-      passwordConfirmation: newPasswordConfirmation,
-    }, { abortEarly: false }).then(() => {
-      setError({});
-    }).catch((errors) => {
-      const schemaErrors = {};
-      if (errors) {
-        errors.inner.forEach((err) => { schemaErrors[err.path] = err.message; });
-        setError(schemaErrors);
-      }
-    });
-  };
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const onChangeHandler = (field, event) => {
-    if (field === 'password') {
-      setPassword(event.target.value);
-    }
-    if (field === 'passwordConfirmation') {
-      setPasswordConfirmation(event.target.value);
-    }
-    if (field === 'name') {
-      setName(event.target.value);
-    }
-    if (field === 'email') {
-      setEmail(event.target.value);
-    }
-    handleErrors({
-      name, email, password, passwordConfirmation,
-    });
-  };
-
-  const onClickHandler = (field) => {
-    if (field === 'showpassword') {
-      setShow({
-        ...show,
-        password: show.password !== true,
-      });
-    }
-
-    if (field === 'showpasswordconfirm') {
-      setShow({
-        ...show,
-        passwordConfirmation: show.passwordConfirmation !== true,
-      });
-    }
-  };
-
-  const onBlurHandler = (field) => {
-    touched[field] = true;
-    setTouched(touched);
-    handleErrors({
-      name, email, password, passwordConfirmation,
-    });
-  };
-
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log({
-      name, email, password, passwordConfirmation,
-    });
-  });
-  const onSubmit = (event) => {
-    event.preventDefault();
-    setName(name);
-    setEmail(email);
-    setPassword(password);
-    setPasswordConfirmation(passwordConfirmation);
-    setOpen(false);
-  };
+const AddDialog = (props) => {
+  const {
+    open,
+    onClose,
+    onSubmit,
+    onClick,
+    onChange,
+    onBlur,
+    data,
+  } = props;
 
   return (
     <div>
-      <Button
-        style={{ margin: '12px' }}
-        variant="outlined"
-        onClick={handleClickOpen}
-      >
+      <Button variant="outlined" onClick={onClick}>
         ADD TRAINEE
       </Button>
-      <Dialog fullWidth maxWidth="md" open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={onClose} fullWidth="true" maxWidth="100px">
         <DialogTitle>Add Trainee</DialogTitle>
-        <form onSubmit={onSubmit}>
-          <DialogContent>
-            <DialogContentText>
-              Enter your trainee details
-            </DialogContentText>
-            <br />
+        <DialogContent>
+          <DialogContentText>Enter your trainee details</DialogContentText>
+          <TextField
+            required
+            margin="dense"
+            type="text"
+            name="name"
+            value={data.name}
+            id="outlined-required"
+            label="Name"
+            fullWidth
+            InputProps={{
+              style: { fontSize: 20 },
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PersonIcon fontSize="22px" color="grey" sx={{ color: '#212121' }} />
+                </InputAdornment>
+              ),
+            }}
+            InputLabelProps={{ style: { fontSize: 20 } }}
+            sx={{ marginTop: '1rem' }}
+            onChange={onChange}
+            onBlur={onBlur}
+            error={(data.errors.name && data.touched.name)}
+            helperText={data.touched.name && data.errors.name}
+          />
+          <TextField
+            margin="dense"
+            type="email"
+            name="email"
+            value={data.email}
+            id="outlined-required"
+            label="Email Address"
+            fullWidth
+            InputProps={{
+              style: { fontSize: 20 },
+              startAdornment: (
+                <InputAdornment position="start">
+                  <EmailIcon sx={{ color: '#212121', fontSize: '22px' }} />
+                </InputAdornment>
+              ),
+            }}
+            InputLabelProps={{ style: { fontSize: 20 } }}
+            sx={{ marginTop: '1rem' }}
+            onChange={onChange}
+            onBlur={onBlur}
+            error={(data.errors.email && data.touched.email)}
+            helperText={data.touched.email && data.errors.email}
+          />
+          <div style={styles.passwordContainer}>
             <TextField
+              margin="dense"
+              type="password"
+              name="password"
+              value={data.password}
+              id="outlined-required"
+              label="Password"
               InputProps={{
-                startAdornment: <InputAdornment onClick={() => { onClickHandler('password'); }} position="start"><PersonIcon /></InputAdornment>,
+                style: { fontSize: 20 },
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <VisibilityOffIcon fontSize="22px" sx={{ color: '#212121' }} />
+                  </InputAdornment>
+                ),
               }}
-              id="outlined-basic"
-              fullWidth
-              required
-              label="Name"
-              variant="outlined"
-              onChange={(event) => onChangeHandler('name', event)}
-              onBlur={() => onBlurHandler('name')}
-              helperText={getError(touched, error, 'name')}
-              error={touched.name && getError(touched, error, 'name') !== ''}
+              InputLabelProps={{ style: { fontSize: 20 } }}
+              sx={{ width: 1 / 2, paddingRight: '0.5rem', marginTop: '1rem' }}
+              onChange={onChange}
+              onBlur={onBlur}
+              error={(data.errors.password && data.touched.password)}
+              helperText={data.touched.password && data.errors.password}
             />
-            <br />
-            <br />
             <TextField
+              margin="dense"
+              type="password"
+              name="confirmPassword"
+              value={data.confirmPassword}
+              id="outlined-required"
+              label="Confirm Password"
               InputProps={{
-                startAdornment: <InputAdornment position="start"><EmailIcon /></InputAdornment>,
+                style: { fontSize: 20 },
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <VisibilityOffIcon fontSize="22px" sx={{ color: '#212121' }} />
+                  </InputAdornment>
+                ),
               }}
-              id="outlined-basic"
-              fullWidth
-              value={email}
-              onChange={(event) => onChangeHandler('email', event)}
-              label="Email"
-              variant="outlined"
-              onBlur={() => onBlurHandler('email')}
-              helperText={getError(touched, error, 'email')}
-              error={touched.email && getError(touched, error, 'email') !== ''}
+              InputLabelProps={{ style: { fontSize: 20 } }}
+              sx={{ width: 1 / 2, marginTop: '1rem' }}
+              onChange={onChange}
+              onBlur={onBlur}
+              error={(data.errors.confirmPassword && data.touched.confirmPassword)}
+              helperText={data.touched.confirmPassword && data.errors.confirmPassword}
             />
-            <br />
-            <br />
-            <div style={{ display: 'flex' }}>
-              <TextField
-                InputProps={{
-                  startAdornment: <InputAdornment onClick={() => { onClickHandler('showpassword'); }} position="start">
-                    <IconButton aria-label="toggle password visibility" edge="end">
-                      {' '}
-                      { show.password ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>,
-                }}
-                fullWidth
-                type={show.password ? 'text' : 'password'}
-                style={{ marginRight: '5px' }}
-                id="outlined-basic"
-                value={password}
-                onChange={(event) => onChangeHandler('password', event)}
-                label="Password"
-                variant="outlined"
-                onBlur={() => onBlurHandler('password')}
-                helperText={getError(touched, error, 'password')}
-                error={touched.password && getError(touched, error, 'password') !== ''}
-              />
-              <TextField
-                InputProps={{
-                  startAdornment: <InputAdornment position="start">
-                    <IconButton aria-label="toggle password visibility" onClick={() => { onClickHandler('showpasswordconfirm'); }} edge="end">
-                      {' '}
-                      { show.passwordConfirmation ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>,
-                }}
-                fullWidth
-                type={show.passwordConfirmation ? 'text' : 'password'}
-                id="outlined-basic"
-                value={passwordConfirmation}
-                onChange={(event) => onChangeHandler('passwordConfirmation', event)}
-                label="Confirm Password"
-                variant="outlined"
-                onBlur={() => onBlurHandler('passwordConfirmation')}
-                helperText={getError(touched, error, 'passwordConfirmation')}
-                error={touched.passwordConfirmation && getError(touched, error, 'passwordConfirmation') !== ''}
-              />
-            </div>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => handleClose('cancel')}>Cancel</Button>
-            <Button
-              type="submit"
-              disabled={hasErrors(error) || !isTouched(touched)}
-            >
-              Submit
-            </Button>
-          </DialogActions>
-        </form>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={onSubmit} variant="contained" disabled={!(!hasErrors(data) && isTouched(data))}>Submit</Button>
+        </DialogActions>
       </Dialog>
     </div>
   );
+};
+
+AddDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    name: PropTypes.string,
+    email: PropTypes.string,
+    password: PropTypes.string,
+    confirmPassword: PropTypes.string,
+    touched: PropTypes.objectOf(PropTypes.bool),
+    errors: PropTypes.objectOf(PropTypes.string),
+  }).isRequired,
 };
 
 export default AddDialog;
