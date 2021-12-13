@@ -13,3 +13,9 @@ export const isTouched = (data) => {
   }
   return false;
 };
+export const getError = (touched, errors, field) => {
+  if (touched[field]) {
+    return errors[field] || '';
+  }
+  return null;
+};
