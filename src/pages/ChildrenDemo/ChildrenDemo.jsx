@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from '@material-ui/core';
 import { Math } from '../../Component';
-import theme from '../../theme';
+import { theme } from '../../theme';
 
 const ChildrenDemo = () => (
   <ThemeProvider theme={theme}>

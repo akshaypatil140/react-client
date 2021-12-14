@@ -1,10 +1,8 @@
 import { createTheme } from '@mui/material/styles';
 
-const theme = createTheme({
+export const theme = createTheme({
   typography: {
-    htmlFontSize: 10,
-    fontFamily: ['Comic Sans MS', 'cursive', 'sans-serif'].join(','),
+    htmlFontSize: 12,
+    fontFamily: 'Comic Sans MS, cursive, sans-serif',
   },
 });
-
-export default theme;

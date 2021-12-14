@@ -1,19 +1,19 @@
 import React from 'react';
+import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Login, Navbar, Trainee } from './pages';
+import { Trainee } from './pages/index';
+import { theme } from './theme';
 
 function App() {
   return (
-    <div>
-      <CssBaseline>
-        <Navbar />
-        {/* <InputDemo /> */}
-        {/* <TextFieldDemo /> */}
-        {/* <ChildrenDemo /> */}
-        <Trainee />
-        <Login />
-      </CssBaseline>
-    </div>
+    <>
+      <CssBaseline />
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <Trainee />
+        </div>
+      </ThemeProvider>
+    </>
   );
 }
 
