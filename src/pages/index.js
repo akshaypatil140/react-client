@@ -1,3 +1,6 @@
-export { default as TextFieldDemo } from './TextFieldDemo';
-export { default as InputDemo } from './InputDemo/InputDemo';
-export { default as ChildrenDemo } from './ChildrenDemo';
+/* eslint-disable import/named */
+export { TextFieldDemo } from './TextFieldDemo';
+export { InputDemo } from './InputDemo';
+export { ChildrenDemo } from './ChildrenDemo';
+export { Trainee } from './Trainee';
+export { Login } from './Login';
