@@ -1,26 +1,19 @@
-import React from 'react';
-import { ThemeProvider } from '@mui/material/styles';
-import { Typography } from '@mui/material';
-import theme from './theme';
-import { ChildrenDemo } from './pages';
-
-// import logo from './logo.svg';
-// import './App.css';
-// import TextFieldDemo from './pages/TextFieldDemo/TextFieldDemo';
-// import InputDemo from './pages/InputDemo/InputDemo';
+import * as React from 'react';
+// import Trainee from './pages/Trainee';
+import { Trainee } from './pages';
+// eslint-disable-next-line import/named
+// import { TextFieldDemo } from './pages/TextFieldDemo';
+// eslint-disable-next-line import/named
+// import { InputDemo } from './pages';
+// import AddDialog from './pages/Trainee';
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      {/* <div className="App"> */}
+    <div>
       {/* <TextFieldDemo /> */}
-      {/* <InputDemo />
-      </div> */}
-
-      <Typography>
-        <ChildrenDemo />
-      </Typography>
-    </ThemeProvider>
+      {/* <InputDemo /> */}
+      <Trainee />
+    </div>
   );
 }
 
