@@ -1,19 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Navbar } from '../components';
-import stylesPrivateRoute from './style';
+import Box from '@mui/material/Box';
 
-const PrivateLayout = (props) => {
-  const { children } = props;
-  return (
-    <>
-      <Navbar />
-      <div style={stylesPrivateRoute.container}>
-        {children}
-      </div>
-    </>
-  );
-};
+import { Navbar } from '../components';
+
+const PrivateLayout = ({ children }) => (
+  <>
+    <Navbar />
+    <Box m={2.5}>
+      {children}
+    </Box>
+  </>
+);
 
 PrivateLayout.propTypes = {
   children: PropTypes.element.isRequired,

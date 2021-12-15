@@ -1,12 +1,15 @@
 import React from 'react';
-import Typography from '@mui/material/Typography';
+import CopyrightOutlinedIcon from '@mui/icons-material/CopyrightOutlined';
+
+import { styles } from './style';
 
 const Footer = () => (
-  <Typography variant="body2" color="text.secondary" align="center" marginTop="70px">
-    {'© Successive Technologies '}
-    {new Date().getFullYear()}
-    {'.'}
-  </Typography>
+  <>
+    <p style={styles.footer}>
+      <CopyrightOutlinedIcon sx={{ fontSize: 18 }} />
+      Successive Technologies
+    </p>
+  </>
 );
 
 export default Footer;

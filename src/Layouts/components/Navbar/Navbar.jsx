@@ -1,36 +1,54 @@
-import React from 'react';
+import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-// import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
-// import { AddDialog } from '../../../components/Trainee/components';
+
+const navbarData = [
+  {
+    buttonLabel: 'Trainee',
+    url: '/',
+  },
+  {
+    buttonLabel: 'Textfield Demo',
+    url: '/text-field-demo',
+  },
+  {
+    buttonLabel: 'Inputfield Demo',
+    url: '/input-demo',
+  },
+  {
+    buttonLabel: 'Children Demo',
+    url: '/children-demo',
+  },
+  {
+    buttonLabel: 'Logout',
+    url: '/login',
+  },
+];
+
+const AddNavbarData = ({ data }) => (
+  data.map((item) => (
+    <Link key={item.buttonLabel} to={item.url} style={{ color: 'white', textDecoration: 'none' }}>
+      <Button color="inherit" sx={{ fontSize: '0.9rem' }}>{item.buttonLabel}</Button>
+    </Link>
+  ))
+);
 
 const Navbar = () => (
   <Box sx={{ flexGrow: 1 }}>
     <AppBar position="static">
       <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-          width="auto"
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 1, fontSize: '1.5rem' }}
         >
-          {/* <MenuIcon /> */}
-        </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Trainee Portal
         </Typography>
-        <Button><Link style={{ color: 'white', textDecoration: 'none' }} to="/Trainee">TRAINEE</Link></Button>
-        <Button><Link style={{ color: 'white', textDecoration: 'none' }} to="/TextFieldDemo">TEXTFIELD DEMO</Link></Button>
-        <Button><Link style={{ color: 'white', textDecoration: 'none' }} to="/InputDemo">INPUT DEMO</Link></Button>
-        <Button><Link style={{ color: 'white', textDecoration: 'none' }} to="/ChildrenDemo">CHILDREN DEMO</Link></Button>
-        <Button style={{ marginLeft: '30px' }}><Link style={{ color: 'white', textDecoration: 'none' }} to="/Login">LOGOUT</Link></Button>
+        <AddNavbarData data={navbarData} />
       </Toolbar>
     </AppBar>
   </Box>

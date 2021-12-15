@@ -1,2 +1,3 @@
-export { default as Footer } from './Footer';
-export { default as Navbar } from './Navbar';
+/* eslint-disable import/named */
+export { Navbar } from './Navbar';
+export { Footer } from './Footer';

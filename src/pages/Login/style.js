@@ -1,9 +1,14 @@
-export const cardStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  maxWidth: '500px',
-  marginTop: '50px',
-  transitionDuration: '0.3s',
-  height: 'auto',
+export const styles = {
+  paperStyle: {
+    padding: 20,
+    height: '400 auto',
+    width: 400,
+    margin: '70px auto',
+  },
+  loginFormHeading: {
+    margin: '1rem',
+    fontFamily: ['Roboto', 'sans-serif'],
+    fontSize: '2rem',
+    fontWeight: 'normal',
+  },
 };

@@ -1,28 +1,36 @@
 /* eslint-disable import/named */
 import React from 'react';
-import { BrowserRouter, Switch } from 'react-router-dom';
-// import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-// import theme from './theme';
-import { AuthRoute, PrivateRoute } from './routes';
 import {
-  TextFieldDemo, InputDemo, ChildrenDemo, Trainee, Login, NoMatch,
-} from './pages';
+  BrowserRouter, Switch,
+} from 'react-router-dom';
 
-const App = () => (
-  <BrowserRouter>
-    <CssBaseline />
+import {
+  Trainee, Login, TextFieldDemo, InputDemo, ChildrenDemo,
+} from './pages/index';
+import { AuthRoute, PrivateRoute } from './routes';
+import { NotFound } from './pages/NotFound';
+import { theme } from './theme';
 
-    <Switch>
-      <PrivateRoute exact path="/" component={Trainee} />
-      <PrivateRoute exact path="/Trainee" component={Trainee} />
-      <PrivateRoute exact path="/TextFieldDemo" component={TextFieldDemo} />
-      <PrivateRoute exact path="/InputDemo" component={InputDemo} />
-      <PrivateRoute exact path="/ChildrenDemo" component={ChildrenDemo} />
-      <AuthRoute exact path="/Login" component={Login} />
-      <PrivateRoute component={NoMatch} />
-    </Switch>
-  </BrowserRouter>
-);
+function App() {
+  return (
+    <BrowserRouter>
+      <CssBaseline />
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <Switch>
+            <AuthRoute exact path="/login" component={Login} />
+            <PrivateRoute exact path="/" component={Trainee} />
+            <PrivateRoute exact path="/text-field-demo" component={TextFieldDemo} />
+            <PrivateRoute exact path="/input-demo" component={InputDemo} />
+            <PrivateRoute exact path="/children-demo" component={ChildrenDemo} />
+            <PrivateRoute path="*" component={NotFound} />
+          </Switch>
+        </div>
+      </ThemeProvider>
+    </BrowserRouter>
+  );
+}
 
 export default App;

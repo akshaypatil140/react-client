@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { errorMessage } from '../SelectField/style';
-// import { hide, show } from './style';
+import { errorMessage } from './style';
 
 const RadioGroup = (props) => {
   const {
