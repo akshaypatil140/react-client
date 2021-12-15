@@ -1,44 +1,56 @@
-import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { MAX_NUMBER } from '../../configs/constant';
-import { getNextRoundRobin, getRandomNumber } from '../../lib/utils/math';
-import { sliderContainer } from './style';
+import { PropTypes } from 'prop-types';
+import { PUBLIC_IMAGE_FOLDER, DEFAULT_BANNER_IMAGE } from '../../configs/constant';
+import { getRandomNumber, getNextRoundRobin } from '../../lib/utils/math';
+import './style.css';
 
 const Slider = (props) => {
   const {
-    altText, banners, height, duration, random, defaultBanner,
+    altText, banners, defaultBanner, duration, height, random,
   } = props;
 
-  const [index, setIndex] = useState(0);
-
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [imageSrc, setImageSrc] = useState((banners && banners.length) ? `${PUBLIC_IMAGE_FOLDER}${banners[currentIndex]}` : defaultBanner);
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (random) {
-        setIndex(getRandomNumber(MAX_NUMBER));
-      } else {
-        setIndex((i) => getNextRoundRobin(MAX_NUMBER, i));
+    let imageIndex;
+    const intervalId = setInterval(() => {
+      if (banners && banners.length) {
+        if (random) {
+          imageIndex = getRandomNumber(banners.length);
+        } else {
+          imageIndex = getNextRoundRobin(banners.length, currentIndex);
+        }
+        setImageSrc(`${PUBLIC_IMAGE_FOLDER}${banners[imageIndex]}`);
+        setCurrentIndex(imageIndex);
       }
-    },
-    duration);
-    return () => clearInterval(interval);
-  }, []);
+    }, duration);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [currentIndex]);
 
   return (
-    <>
-      <div style={sliderContainer}>
-        <img src={banners[index] ? banners[index] : defaultBanner} alt={altText} height={height} />
-      </div>
-    </>
+    <div className="banner" style={{ height }}>
+      <img src={imageSrc} alt={altText} />
+    </div>
   );
 };
 
+Slider.defaultProps = {
+  altText: 'Default Banner',
+  defaultBanner: DEFAULT_BANNER_IMAGE,
+  duration: 2000,
+  height: 200,
+  random: false,
+};
+
 Slider.propTypes = {
-  altText: PropTypes.string.isRequired,
-  banners: PropTypes.arrayOf.isRequired,
-  height: PropTypes.number.isRequired,
-  duration: PropTypes.number.isRequired,
-  random: PropTypes.number.isRequired,
-  defaultBanner: PropTypes.string.isRequired,
+  altText: PropTypes.string,
+  banners: PropTypes.arrayOf(PropTypes.string).isRequired,
+  defaultBanner: PropTypes.string,
+  duration: PropTypes.number,
+  height: PropTypes.number,
+  random: PropTypes.bool,
 };
 
 export default Slider;

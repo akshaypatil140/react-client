@@ -1,26 +1,35 @@
+/* eslint-disable import/named */
 import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import { Typography } from '@mui/material';
-import theme from './theme';
-import { ChildrenDemo } from './pages';
+import CssBaseline from '@mui/material/CssBaseline';
+import {
+  BrowserRouter, Switch,
+} from 'react-router-dom';
 
-// import logo from './logo.svg';
-// import './App.css';
-// import TextFieldDemo from './pages/TextFieldDemo/TextFieldDemo';
-// import InputDemo from './pages/InputDemo/InputDemo';
+import {
+  Trainee, Login, TextFieldDemo, InputDemo, ChildrenDemo,
+} from './pages/index';
+import { AuthRoute, PrivateRoute } from './routes';
+import { NotFound } from './pages/NotFound';
+import { theme } from './theme';
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      {/* <div className="App"> */}
-      {/* <TextFieldDemo /> */}
-      {/* <InputDemo />
-      </div> */}
-
-      <Typography>
-        <ChildrenDemo />
-      </Typography>
-    </ThemeProvider>
+    <BrowserRouter>
+      <CssBaseline />
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <Switch>
+            <AuthRoute exact path="/login" component={Login} />
+            <PrivateRoute exact path="/" component={Trainee} />
+            <PrivateRoute exact path="/text-field-demo" component={TextFieldDemo} />
+            <PrivateRoute exact path="/input-demo" component={InputDemo} />
+            <PrivateRoute exact path="/children-demo" component={ChildrenDemo} />
+            <PrivateRoute path="*" component={NotFound} />
+          </Switch>
+        </div>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

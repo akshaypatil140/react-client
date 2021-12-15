@@ -1,6 +1,6 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Typography } from '@mui/material';
 
 const Math = (props) => {
   const {
@@ -21,7 +21,7 @@ const Math = (props) => {
     return children(first, second, result);
   }
   return (
-    <>
+    <Typography>
       <p>
         {' '}
         {first}
@@ -35,7 +35,7 @@ const Math = (props) => {
         {result}
         {' '}
       </p>
-    </>
+    </Typography>
   );
 };
 Math.propTypes = {
@@ -46,6 +46,7 @@ Math.propTypes = {
   children: PropTypes.func,
 };
 Math.defaultProps = {
-  children: undefined,
+  children: '',
 };
+
 export default Math;

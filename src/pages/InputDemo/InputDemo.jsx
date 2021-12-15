@@ -33,11 +33,11 @@ const InputDemo = () => {
   const [error, setError] = useState([]);
   const [touched, setTouched] = useState([]);
 
-  const handleErrors = (formValues) => {
+  const handleErrors = async (formValues) => {
     const {
       name: newName, sport: newSport, football: newFootball, cricket: newCricket,
     } = formValues;
-    schema.validate({
+    await schema.validate({
       name: newName, sport: newSport, football: newFootball, cricket: newCricket,
     }, { abortEarly: false }).then(() => {
       setError({});
@@ -50,15 +50,15 @@ const InputDemo = () => {
     });
   };
 
-  const onBlurHandler = (event, type) => {
+  const onBlurHandler = async (event, type) => {
     touched[type] = true;
     setTouched(touched);
-    handleErrors({
+    await handleErrors({
       name, sport, football, cricket,
     });
   };
 
-  const handleSportChange = (event) => {
+  const handleSportChange = async (event) => {
     const { value } = event.target;
     if (value === '' || value === DEFAULT_SELECT) {
       setSport('');
@@ -67,19 +67,19 @@ const InputDemo = () => {
     }
     setCricket('');
     setFootball('');
-    handleErrors({
+    await handleErrors({
       name, sport, football, cricket,
     });
   };
 
-  const handleNameChange = (event) => {
+  const handleNameChange = async (event) => {
     setName(event.target.value);
-    handleErrors({
+    await handleErrors({
       name, sport, football, cricket,
     });
   };
 
-  const handleWhatToDoChange = (event) => {
+  const handleWhatToDoChange = async (event) => {
     if (event.target.value === CRICKET_VALUE) {
       setFootball('');
       setCricket(event.target.attributes.label.value);
@@ -87,7 +87,7 @@ const InputDemo = () => {
       setCricket('');
       setFootball(event.target.attributes.label.value);
     }
-    handleErrors({
+    await handleErrors({
       name, sport, football, cricket,
     });
   };
