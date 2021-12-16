@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   Box, Button, Card, CardContent, CardMedia, Typography,
 } from '@mui/material';
@@ -9,10 +10,17 @@ import { getDateFormatted } from '../../lib/utils/helper';
 import {
   btnContainer, linkStyle, cardStyle, cardMediaStyle, boxStyle, cardContentStyle, buttonStyle,
 } from './style';
+import NoMatch from '../NoMatch';
 
 const TraineeDetail = (props) => {
   const { match } = props;
+  console.log(match.params.id);
   const data = trainees.find((e) => e.id === match.params.id);
+  if (!data) {
+    return (
+      <NoMatch />
+    );
+  }
   const { name, email, createdAt } = data;
   return (
     <div>
